@@ -1,0 +1,98 @@
+import { View, Text, Dimensions, TouchableOpacity, Modal, SafeAreaView, KeyboardAvoidingView, ImageBackground, StatusBar, Image, FlatList, TextInput, ScrollView } from 'react-native'
+import React, { useState, useContext, useRef } from 'react'
+import { Colors } from '../theme/color'
+import themeContext from '../theme/themeContex'
+import style from '../theme/style'
+import { useNavigation } from '@react-navigation/native'
+import { Avatar, RadioButton } from 'react-native-paper'
+import { AppBar, HStack } from '@react-native-material/core';
+import Icon from 'react-native-vector-icons/Ionicons';
+import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
+
+const width = Dimensions.get('screen').width
+const height = Dimensions.get('screen').height
+
+export default function TExam() {
+    const navigation = useNavigation();
+    const theme = useContext(themeContext);
+    const [checked, setChecked] = useState(false);
+    return (
+        <SafeAreaView style={[style.area, { backgroundColor: theme.bg }]}>
+            <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : null}>
+                <View style={[style.main, { backgroundColor: theme.bg, marginTop: 30 }]}>
+                    <AppBar
+                        color={theme.bg}
+                        elevation={0}
+                        centerTitle={true}
+                        title='Test Exam'
+                        titleStyle={[style.subtitle, { color: theme.txt }]}
+                        leading={<TouchableOpacity onPress={() => navigation.navigate('Ph3')}>
+                            <Icon name="arrow-back" color={theme.txt} size={24} />
+                        </TouchableOpacity>}
+                        trailing={<TouchableOpacity onPress={() => navigation.navigate('TExam1')}>
+                            <Text style={[style.m14, { color: Colors.primary }]}>Submit</Text>
+                        </TouchableOpacity>}
+                    />
+                    <ScrollView showsVerticalScrollIndicator={false} style={{ marginTop: 10 }}>
+
+                        <Text style={[style.subtitle, { color: theme.txt }]}>Question 1</Text>
+                        <Image source={require('../../assets/image/s19.png')} style={{ marginTop: 10, height: height / 4, width: width - 40, resizeMode: 'stretch' }} />
+                        <Text style={[style.s18, { color: theme.txt, marginTop: 15 }]}>In the following cases, when does the object make a sound?</Text>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 15 }}>
+                            <RadioButton
+                                value="first"
+                                status={checked === 'first' ? 'checked' : 'unchecked'}
+                                onPress={() => setChecked('first')}
+                                color={Colors.primary}
+                                uncheckedColor={Colors.disable}
+                            />
+                            <Text style={[style.m16, { color: theme.txt1, marginLeft: 10, flex: 1 }]}>A. When stretching the object</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 5 }}>
+                            <RadioButton
+                                value="second"
+                                status={checked === 'second' ? 'checked' : 'unchecked'}
+                                onPress={() => setChecked('second')}
+                                color={Colors.primary}
+                                uncheckedColor={Colors.disable}
+                            />
+                            <Text style={[style.m16, { color: theme.txt1, marginLeft: 10, flex: 1 }]}>B. When bending objects</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 5 }}>
+                            <RadioButton
+                                value="third"
+                                status={checked === 'third' ? 'checked' : 'unchecked'}
+                                onPress={() => setChecked('third')}
+                                color={Colors.primary}
+                                uncheckedColor={Colors.disable}
+                            />
+                            <Text style={[style.m16, { color: theme.txt1, marginLeft: 10, flex: 1 }]}>C. When compressing objects</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 5 }}>
+                            <RadioButton
+                                value="fourth"
+                                status={checked === 'fourth' ? 'checked' : 'unchecked'}
+                                onPress={() => setChecked('fourth')}
+                                color={Colors.primary}
+                                uncheckedColor={Colors.disable}
+                            />
+                            <Text style={[style.m16, { color: theme.txt1, marginLeft: 10, flex: 1 }]}>D. When making an object vibrate</Text>
+                        </View>
+                    </ScrollView>
+
+                    <View style={{ alignItems: 'center', marginBottom: 10 }}>
+                        <Text style={[style.r12, { color: theme.disable }]}>Question 1 of 15</Text>
+                        <View style={{ padding: 5 }}>
+                            <View style={[style.shadow, { shadowColor: Colors.active, backgroundColor: Colors.secondary, padding: 15, paddingVertical: 10, borderRadius: 30, flexDirection: 'row', alignItems: 'center' }]}>
+                                <Icon name="arrow-back" color={Colors.active} size={32} />
+                                <View style={[style.verticaldivider, { backgroundColor: '#E4E6EA', marginHorizontal: 15,width:2 }]}></View>
+                                <Icon name="arrow-forward" color={Colors.active} size={32} />
+                            </View>
+                        </View>
+                    </View>
+
+                </View>
+            </KeyboardAvoidingView>
+        </SafeAreaView>
+    )
+}
