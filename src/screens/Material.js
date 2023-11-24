@@ -59,7 +59,7 @@ const Top = () => {
                   style.m14,
                   {color: focused ? theme.txt : Colors.disable},
                 ]}>
-                Document
+                Konu Anlatımı
               </Text>
             </View>
           ),
@@ -85,7 +85,7 @@ const Top = () => {
                   style.m14,
                   {color: focused ? theme.txt : Colors.disable},
                 ]}>
-                Exam
+                Testler
               </Text>
             </View>
           ),
@@ -112,7 +112,7 @@ const Top = () => {
                   style.m14,
                   {color: focused ? theme.txt : Colors.disable},
                 ]}>
-                Passed
+                Tamamlananlar
               </Text>
             </View>
           ),
@@ -145,7 +145,7 @@ const Document1 = () => {
               resizeMode="stretch"
               style={{height: 54, width: 54}}></Image>
             <Text style={[style.s12, {color: theme.txt, marginTop: 5}]}>
-              Physics
+              Fizik
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -156,7 +156,7 @@ const Document1 = () => {
               resizeMode="stretch"
               style={{height: 54, width: 54}}></Image>
             <Text style={[style.s12, {color: theme.txt, marginTop: 5}]}>
-              Science
+              Fen Bilimleri
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -167,7 +167,7 @@ const Document1 = () => {
               resizeMode="stretch"
               style={{height: 54, width: 54}}></Image>
             <Text style={[style.s12, {color: theme.txt, marginTop: 5}]}>
-              Chemistry
+              Kimya
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -178,11 +178,10 @@ const Document1 = () => {
               resizeMode="stretch"
               style={{height: 54, width: 54}}></Image>
             <Text style={[style.s12, {color: theme.txt, marginTop: 5}]}>
-              Biology
+              Biyoloji
             </Text>
           </TouchableOpacity>
         </View>
-
         <View
           style={{
             flexDirection: 'row',
@@ -200,7 +199,7 @@ const Document1 = () => {
               resizeMode="stretch"
               style={{height: 54, width: 54}}></Image>
             <Text style={[style.s12, {color: theme.txt, marginTop: 5}]}>
-              Math
+              Matematik
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -211,7 +210,7 @@ const Document1 = () => {
               resizeMode="stretch"
               style={{height: 54, width: 54}}></Image>
             <Text style={[style.s12, {color: theme.txt, marginTop: 5}]}>
-              Science
+              İngilizce
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -222,7 +221,7 @@ const Document1 = () => {
               resizeMode="stretch"
               style={{height: 54, width: 54}}></Image>
             <Text style={[style.s12, {color: theme.txt, marginTop: 5}]}>
-              Literature
+              Edebiyat
             </Text>
           </TouchableOpacity>
           <View style={{alignItems: 'center', height: 54, width: 54}}></View>
@@ -254,7 +253,7 @@ const Exam = () => {
               resizeMode="stretch"
               style={{height: 54, width: 54}}></Image>
             <Text style={[style.s12, {color: theme.txt, marginTop: 5}]}>
-              Physics
+              Fizik
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -265,7 +264,7 @@ const Exam = () => {
               resizeMode="stretch"
               style={{height: 54, width: 54}}></Image>
             <Text style={[style.s12, {color: theme.txt, marginTop: 5}]}>
-              Science
+              Fen Bilimleri
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -276,7 +275,7 @@ const Exam = () => {
               resizeMode="stretch"
               style={{height: 54, width: 54}}></Image>
             <Text style={[style.s12, {color: theme.txt, marginTop: 5}]}>
-              Chemistry
+              Kimya
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -287,11 +286,10 @@ const Exam = () => {
               resizeMode="stretch"
               style={{height: 54, width: 54}}></Image>
             <Text style={[style.s12, {color: theme.txt, marginTop: 5}]}>
-              Biology
+              Biyoloji
             </Text>
           </TouchableOpacity>
         </View>
-
         <View
           style={{
             flexDirection: 'row',
@@ -309,7 +307,7 @@ const Exam = () => {
               resizeMode="stretch"
               style={{height: 54, width: 54}}></Image>
             <Text style={[style.s12, {color: theme.txt, marginTop: 5}]}>
-              Math
+              Matematik
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -320,7 +318,7 @@ const Exam = () => {
               resizeMode="stretch"
               style={{height: 54, width: 54}}></Image>
             <Text style={[style.s12, {color: theme.txt, marginTop: 5}]}>
-              Science
+              İngilizce
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -331,7 +329,7 @@ const Exam = () => {
               resizeMode="stretch"
               style={{height: 54, width: 54}}></Image>
             <Text style={[style.s12, {color: theme.txt, marginTop: 5}]}>
-              Literature
+              Edebiyat
             </Text>
           </TouchableOpacity>
           <View style={{alignItems: 'center', height: 54, width: 54}}></View>
@@ -355,10 +353,9 @@ const Passed = () => {
             resizeMode="stretch"
             style={{height: 54, width: 54}}></Image>
           <View style={{marginLeft: 15, flex: 1}}>
-            <Text style={[style.s18, {color: theme.txt}]}>Physics</Text>
+            <Text style={[style.s18, {color: theme.txt}]}>Fizik</Text>
             <Text style={[style.r12, {color: theme.txt1, marginTop: -4}]}>
-              You have completed{' '}
-              <Text style={{color: Colors.green}}>28/35</Text> questions
+              Tamamlanan <Text style={{color: Colors.green}}>28/35</Text> soru.
             </Text>
           </View>
           <Image
@@ -375,10 +372,9 @@ const Passed = () => {
             resizeMode="stretch"
             style={{height: 54, width: 54}}></Image>
           <View style={{marginLeft: 15, flex: 1}}>
-            <Text style={[style.s18, {color: theme.txt}]}>Science</Text>
+            <Text style={[style.s18, {color: theme.txt}]}>Kimya</Text>
             <Text style={[style.r12, {color: theme.txt1, marginTop: -4}]}>
-              You have completed{' '}
-              <Text style={{color: Colors.green}}>22/35</Text> questions
+              Tamamlanan <Text style={{color: Colors.green}}>25/35</Text> soru.
             </Text>
           </View>
           <Image
@@ -400,10 +396,9 @@ const Passed = () => {
             resizeMode="stretch"
             style={{height: 54, width: 54}}></Image>
           <View style={{marginLeft: 15, flex: 1}}>
-            <Text style={[style.s18, {color: theme.txt}]}>Chemistry</Text>
+            <Text style={[style.s18, {color: theme.txt}]}>Kimya</Text>
             <Text style={[style.r12, {color: theme.txt1, marginTop: -4}]}>
-              You have completed <Text style={{color: Colors.red}}>12/35</Text>{' '}
-              questions
+              Tamamlanan <Text style={{color: Colors.red}}>9/35</Text> soru.
             </Text>
           </View>
           <Image
@@ -428,7 +423,10 @@ export default function Material() {
             alignItems: 'center',
             justifyContent: 'space-between',
           }}>
-          <Text style={[style.apptitle, {color: theme.txt}]}>Materials</Text>
+          <Text
+            style={[style.apptitle, {color: theme.txt, fontWeight: 'bold'}]}>
+            Yazılı Dökümanlar
+          </Text>
           <Image
             source={require('../../assets/image/a1.png')}
             resizeMode="stretch"
