@@ -51,11 +51,10 @@ export default function Signup() {
             showsVerticalScrollIndicator={false}
             style={{marginTop: 10}}>
             <Text style={[style.title, {color: theme.txt, marginTop: 10}]}>
-              New Account
+              Yeni Hesap
             </Text>
             <Text style={[style.r14, {color: theme.txt}]}>
-              Create new account to get access to Agensip Course by entering
-              your mobile number
+              Kurslara Hemen Erişmek İçin Yeni Bir Hesap Oluşturun.
             </Text>
             <View style={{paddingTop: 20}}>
               <PhoneInput
@@ -93,7 +92,7 @@ export default function Signup() {
             onPress={() => navigation.navigate('Otp')}
             style={[style.btn, {paddingTop: 5, marginVertical: 20}]}>
             <Text style={[style.btntxt, {color: Colors.secondary}]}>
-              Get Started
+              Kayıt Ol
             </Text>
           </TouchableOpacity>
         </View>

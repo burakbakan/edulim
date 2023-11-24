@@ -78,15 +78,15 @@ export default function Introduction() {
             <View style={{paddingHorizontal: 20, flex: 1, marginTop: 30}}>
               <Text
                 style={[style.title, {color: theme.txt, textAlign: 'center'}]}>
-                Brand new curriculum
+                Gelişmiş Online Eğitim Yazılımı
               </Text>
               <Text
                 style={[
                   style.r14,
                   {color: theme.txt, marginTop: 10, textAlign: 'center'},
                 ]}>
-                This is the first online education platform designed by the
-                world s top professors.
+                Ekiplerimiz tarafından geliştirilmiş profesyonel Online Eğitim
+                ve E-Ticaret paketlerimiz sizlerle!
               </Text>
               <TouchableOpacity
                 onPress={() => navigation.navigate('Login')}
@@ -101,7 +101,7 @@ export default function Introduction() {
                   },
                 ]}>
                 <Text style={[style.btntxt, {color: Colors.secondary}]}>
-                  Get Started
+                  Hadi Başlayalım!
                 </Text>
               </TouchableOpacity>
             </View>
@@ -156,15 +156,15 @@ export default function Introduction() {
             <View style={{paddingHorizontal: 20, flex: 1, marginTop: 30}}>
               <Text
                 style={[style.title, {color: theme.txt, textAlign: 'center'}]}>
-                Bring a fun atmosphere
+                Nasıl Çalışır ?
               </Text>
               <Text
                 style={[
                   style.r14,
                   {color: theme.txt, marginTop: 10, textAlign: 'center'},
                 ]}>
-                This is the first online education platform designed by the
-                world s top professors.
+                "Hemen öğrenmeye başlamak için sadece 3 adım gerekiyor: Kayıt
+                olun, giriş yapın, öğrenmeye başlayın!"
               </Text>
               <TouchableOpacity
                 onPress={() => navigation.navigate('Login')}
@@ -179,7 +179,7 @@ export default function Introduction() {
                   },
                 ]}>
                 <Text style={[style.btntxt, {color: Colors.secondary}]}>
-                  Get Started
+                  Hadi Başlayalım!
                 </Text>
               </TouchableOpacity>
             </View>
@@ -234,15 +234,16 @@ export default function Introduction() {
             <View style={{paddingHorizontal: 20, flex: 1, marginTop: 30}}>
               <Text
                 style={[style.title, {color: theme.txt, textAlign: 'center'}]}>
-                Brand new curriculum
+                Modüllerimiz
               </Text>
               <Text
                 style={[
                   style.r14,
                   {color: theme.txt, marginTop: 10, textAlign: 'center'},
                 ]}>
-                This is the first online education platform designed by the
-                world s top professors.
+                Eğitim yazılımlarımız,öğrencilerin daha fazla öğrenme fırsatı
+                elde etmelerine ve öğretmenlerin öğrenci performanslarını daha
+                kolay bir şekilde izlemelerine olanak tanır.
               </Text>
               <TouchableOpacity
                 onPress={() => navigation.navigate('Login')}
@@ -257,7 +258,7 @@ export default function Introduction() {
                   },
                 ]}>
                 <Text style={[style.btntxt, {color: Colors.secondary}]}>
-                  Get Started
+                  Hadi Başlayalım!
                 </Text>
               </TouchableOpacity>
             </View>
