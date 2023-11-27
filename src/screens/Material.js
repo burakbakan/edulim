@@ -30,6 +30,15 @@ const Tab = createMaterialTopTabNavigator();
 const Top = () => {
   const theme = useContext(themeContext);
 
+  fetch('https://smup.com.tr/api/get-all-courses')
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -363,7 +372,6 @@ const Passed = () => {
             resizeMode="stretch"
             style={{height: 60, width: 60}}></Image>
         </TouchableOpacity>
-
         <TouchableOpacity
           onPress={() => navigation.navigate('Document')}
           style={{flexDirection: 'row', alignItems: 'center', marginTop: 20}}>
@@ -382,7 +390,6 @@ const Passed = () => {
             resizeMode="stretch"
             style={{height: 60, width: 60}}></Image>
         </TouchableOpacity>
-
         <TouchableOpacity
           onPress={() => navigation.navigate('Document')}
           style={{

@@ -67,25 +67,32 @@ export default function Home() {
           </Text>
         </TouchableOpacity>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <TextInput
-            placeholder="Keşfet..."
-            placeholderTextColor={theme.disable}
-            style={[
-              style.apptitle,
-              {
-                color: theme.txt,
-                flex: 1,
-                borderWidth: 1,
-                borderColor: '#ccc',
-                borderRadius: 10,
-                paddingHorizontal: 10,
-                paddingVertical: 5,
-                marginRight: 10,
-                fontSize: 18,
-              },
-            ]}
-          />
-          <Icon name="search" size={24} color={theme.txt}></Icon>
+          <TouchableOpacity
+            style={{flex: 1, height: 35}}
+            onPress={() => navigation.navigate('ASub')}>
+            <Text
+              // placeholder="Keşfet..."
+              // placeholderTextColor={theme.disable}
+              style={[
+                style.apptitle,
+                {
+                  color: theme.disable,
+                  flex: 1,
+                  borderWidth: 1,
+                  borderColor: '#ccc',
+                  borderRadius: 10,
+                  paddingHorizontal: 10,
+                  paddingVertical: 5,
+                  marginRight: 10,
+                  fontSize: 18,
+                },
+              ]}>
+              Keşfet...
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('ASub')}>
+            <Icon name="search" size={24} color={theme.txt}></Icon>
+          </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('Notification')}>
             <Icon
               name="notifications-outline"

@@ -93,7 +93,7 @@ export default function Login() {
           </View>
           <View style={{marginTop: 30, marginBottom: 20}}>
             <TouchableOpacity
-              onPress={() => navigation.navigate('Signup')}
+              onPress={() => navigation.navigate('MyTabs')}
               style={style.btn}>
               <Text style={[style.btntxt, {marginTop: 5}]}>Giriş</Text>
             </TouchableOpacity>

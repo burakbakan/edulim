@@ -66,7 +66,7 @@ export default function Chat() {
               <Text
                 style={[
                   style.m16,
-                  {color: theme.txt, flex: 1, fontWeight: 'bold', fontSize: 18},
+                  {color: theme.txt, flex: 1, fontWeight: 'bold'},
                 ]}>
                 Gruplar
               </Text>
@@ -150,7 +150,9 @@ export default function Chat() {
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
-                <Text style={[style.b14, {color: Colors.secondary}]}>Join</Text>
+                <Text style={[style.b14, {color: Colors.secondary}]}>
+                  Katıl
+                </Text>
               </View>
             </View>
 
@@ -220,7 +222,9 @@ export default function Chat() {
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
-                <Text style={[style.b14, {color: Colors.secondary}]}>Join</Text>
+                <Text style={[style.b14, {color: Colors.secondary}]}>
+                  Katıl
+                </Text>
               </View>
             </View>
 
@@ -230,7 +234,11 @@ export default function Chat() {
                 alignItems: 'center',
                 marginTop: 20,
               }}>
-              <Text style={[style.m16, {color: theme.txt, flex: 1}]}>
+              <Text
+                style={[
+                  style.m16,
+                  {color: theme.txt, flex: 1, fontWeight: 'bold'},
+                ]}>
                 Mesajlar
               </Text>
               <TouchableOpacity
