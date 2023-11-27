@@ -38,6 +38,49 @@ export default function Home() {
   const navigation = useNavigation();
   const theme = useContext(themeContext);
   const [categories, setCategories] = useState([]);
+  const [homeCourses, setHomeCourses] = useState([]);
+
+  useEffect(() => {
+    // Fetch categories from the API
+    fetch('https://demo.edulim.com.tr/api/categories')
+      .then(response => response.json())
+      .then(data => {
+        if (Array.isArray(data.data)) {
+          // If data.data is an array, setCategories and log values
+          setCategories(data.data);
+
+          // Log the name and image values to the console
+          data.data.forEach(category => {
+            console.log('Category Name:', category.name);
+            console.log(
+              'Category Image:',
+              `https://demo.edulim.com.tr/${category.image}`,
+            );
+          });
+        } else {
+          console.error('Data.data is not an array:', data);
+        }
+      })
+      .catch(error => console.error('Error fetching categories:', error));
+  }, []);
+
+  useEffect(() => {
+    // Fetch home courses from the API
+    fetch('https://demo.edulim.com.tr/api/get-home-courses')
+      .then(response => response.json())
+      .then(data => {
+        if (Array.isArray(data.data)) {
+          // If data.data is an array, setHomeCourses and log values
+          setHomeCourses(data.data);
+
+          // Log the home courses data to the console
+          console.log('Home Courses:', data.data);
+        } else {
+          console.error('Data.data is not an array:', data);
+        }
+      })
+      .catch(error => console.error('Error fetching home courses:', error));
+  }, []); // Empty dependency array to run the effect only once on mount
 
   useEffect(() => {
     // Fetch categories from the API
@@ -72,7 +115,7 @@ export default function Home() {
       <Image
         source={{uri: `https://demo.edulim.com.tr/${item.image}`}}
         resizeMode="stretch"
-        style={{height: 54, width: 54}}
+        style={{height: 44, width: 44}}
       />
       <Text
         style={[
@@ -80,16 +123,17 @@ export default function Home() {
           {color: theme.txt, marginTop: 5, textAlign: 'center'},
         ]}>
         {item.name && typeof item.name === 'object' && item.name.tr
-          ? item.name.tr.split(' ').map((word, index, array) => (
-              <Text key={index}>
-                {word}
-                {index < array.length - 1 ? '\n' : ''}
-              </Text>
-            ))
+          ? truncateText(item.name.tr, 20)
           : 'Unknown Category'}
       </Text>
     </TouchableOpacity>
   );
+  const truncateText = (text, maxLength) => {
+    return text.length > maxLength
+      ? text.substring(0, maxLength - 3) + '...'
+      : text;
+  };
+
   return (
     <SafeAreaView style={[style.area, {backgroundColor: theme.bg}]}>
       <View
@@ -336,6 +380,18 @@ export default function Home() {
               alignItems: 'center',
               marginTop: 20,
               marginBottom: 80,
+              marginHorizontal: 5,
+              backgroundColor: '#fff',
+              padding: 10,
+              borderRadius: 10,
+              shadowColor: '#000',
+              shadowOffset: {
+                width: 0,
+                height: 2,
+              },
+              shadowOpacity: 0.15,
+              shadowRadius: 9.65,
+              elevation: 4,
             }}>
             <Image
               source={require('../../assets/image/a7.png')}

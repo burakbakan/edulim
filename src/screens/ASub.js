@@ -9,17 +9,15 @@ import {
   KeyboardAvoidingView,
   Image,
   ScrollView,
-  Platform,
+  FlatList,
 } from 'react-native';
 import React, {useState, useContext, useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import style from '../theme/style';
 import {Colors} from '../theme/color';
-import {Avatar} from 'react-native-paper';
-import {AppBar, HStack} from '@react-native-material/core';
+import {AppBar} from '@react-native-material/core';
 import themeContext from '../theme/themeContex';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const width = Dimensions.get('screen').width;
 const height = Dimensions.get('screen').height;
@@ -29,9 +27,30 @@ export default function ASub() {
   const theme = useContext(themeContext);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [numColumns, setNumColumns] = useState(4);
 
   useEffect(() => {
-    // Bu useEffect, bileşen ilk render edildiğinde çalışır
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch(
+          'https://demo.edulim.com.tr/api/categories',
+        );
+        const data = await response.json();
+        if (Array.isArray(data.data)) {
+          setCategories(data.data);
+        } else {
+          console.error('Data.data is not an array:', data);
+        }
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(
@@ -40,11 +59,6 @@ export default function ASub() {
         const data = await response.json();
         if (Array.isArray(data)) {
           setSearchResults(data);
-
-          // Gelen datanın id'lerini konsola bas
-          data.forEach(result => {
-            console.log('ID:', result.id);
-          });
         } else {
           setSearchResults([]);
           if (data.total === 0) {
@@ -67,20 +81,11 @@ export default function ASub() {
       );
       const data = await response.json();
 
-      // Gelen veriyi konsola bas
       console.log('Search Results:', data);
 
-      // Veri bir dizi mi kontrol et
       if (Array.isArray(data.data)) {
-        // Arama sonuçları ile state'i güncelle
         setSearchResults(data.data);
-
-        // Gelen datanın id'lerini konsola bas
-        data.data.forEach(result => {
-          console.log('ID:', result.id);
-        });
       } else {
-        // Veri bir dizi değilse veya undefined/null ise, searchResults'ı boş bir dizi yap
         setSearchResults([]);
       }
     } catch (error) {
@@ -96,7 +101,7 @@ export default function ASub() {
           elevation={0}
           leading={
             <TouchableOpacity onPress={() => navigation.navigate('MyTabs')}>
-              <Icon style={{}} name="arrow-back" size={24} color={theme.txt} />
+              <Icon name="arrow-back" size={24} color={theme.txt} />
             </TouchableOpacity>
           }
           trailing={
@@ -144,127 +149,71 @@ export default function ASub() {
             </TouchableOpacity>
           }
         />
-        <Text style={[style.s18, {color: theme.txt}]}>Kategoriler</Text>
+        {/* <Text style={[style.s18, {color: theme.txt}]}>Kategoriler</Text>
         <Text style={[style.m14, {color: theme.disable, marginTop: 2}]}>
           İstediğin kategoriyi seç ve öğrenmeye başla.
         </Text>
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          style={{marginTop: 10}}>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              marginTop: 20,
-            }}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('Physics')}
-              style={{alignItems: 'center'}}>
-              <Image
-                source={require('../../assets/image/canli.png')}
-                resizeMode="stretch"
-                style={{height: 54, width: 54}}></Image>
-              <Text style={[style.s12, {color: theme.txt, marginTop: 5}]}>
-                Canlı Ders
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('Physics')}
-              style={{alignItems: 'center'}}>
-              <Image
-                source={require('../../assets/image/sosyal.png')}
-                resizeMode="stretch"
-                style={{height: 54, width: 54}}></Image>
-              <Text style={[style.s12, {color: theme.txt, marginTop: 5}]}>
-                Sosyal Medya
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('Physics')}
-              style={{alignItems: 'center'}}>
-              <Image
-                source={require('../../assets/image/sosyal.png')}
-                resizeMode="stretch"
-                style={{height: 54, width: 54}}></Image>
-              <Text style={[style.s12, {color: theme.txt, marginTop: 5}]}>
-                E-Ticaret{'\n'}Yönetimi
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('Physics')}
-              style={{alignItems: 'center'}}>
-              <Image
-                source={require('../../assets/image/sosyal.png')}
-                resizeMode="stretch"
-                style={{height: 54, width: 54}}></Image>
-              <Text style={[style.s12, {color: theme.txt, marginTop: 5}]}>
-                Dijital Pazarlama
-              </Text>
-            </TouchableOpacity>
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <FlatList
+            scrollEnabled={false}
+            key={numColumns}
+            numColumns={numColumns}
+            style={{marginTop: 20}}
+            showsHorizontalScrollIndicator={false}
+            data={categories}
+            renderItem={({item}) => (
+              <TouchableOpacity
+                style={{
+                  alignItems: 'center',
+                  borderWidth: 1,
+                  borderRadius: 10,
+                  width: width / 6,
+                  height: height / 6,
+                }}
+                onPress={() =>
+                  navigation.navigate('CategoryDetail', {categoryId: item.id})
+                }>
+                <Image
+                  source={{uri: `https://demo.edulim.com.tr/${item.image}`}}
+                  resizeMode="stretch"
+                  style={{height: 40, width: 40}}
+                />
+                <Text
+                  style={[
+                    style.s12,
+                    {color: theme.txt, marginTop: 5, textAlign: 'center'},
+                  ]}>
+                  {item.name && typeof item.name === 'object' && item.name.tr
+                    ? item.name.tr.split(' ').map((word, index, array) => (
+                        <Text key={index}>
+                          {word}
+                          {index < array.length - 1 ? '\n' : ''}
+                        </Text>
+                      ))
+                    : 'Unknown Category'}
+                </Text>
+              </TouchableOpacity>
+            )}
+            keyExtractor={item => item.id.toString()}
+          />
+        </View> */}
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginTop: 25,
+          }}></View>
+        {searchResults.map(result => (
+          <View key={result.id}>
+            <Text style={{color: theme.txt}}>{result.title.tr}</Text>
+            <Text style={{color: theme.txt}}>ID: {result.id}</Text>
           </View>
-
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              marginTop: 25,
-            }}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('Physics')}
-              style={{alignItems: 'center'}}>
-              <Image
-                source={require('../../assets/image/a8.png')}
-                resizeMode="stretch"
-                style={{height: 54, width: 54}}></Image>
-              <Text style={[style.s12, {color: theme.txt, marginTop: 5}]}>
-                Kariyer Gelişim
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('Physics')}
-              style={{alignItems: 'center'}}>
-              <Image
-                source={require('../../assets/image/a9.png')}
-                resizeMode="stretch"
-                style={{height: 54, width: 54}}></Image>
-              <Text style={[style.s12, {color: theme.txt, marginTop: 5}]}>
-                Yazılım
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('Physics')}
-              style={{alignItems: 'center'}}>
-              <Image
-                source={require('../../assets/image/a10.png')}
-                resizeMode="stretch"
-                style={{height: 54, width: 54}}></Image>
-              <Text style={[style.s12, {color: theme.txt, marginTop: 5}]}>
-                Kişisel Gelişim
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('Physics')}
-              style={{alignItems: 'center'}}>
-              <Image
-                source={require('../../assets/image/a10.png')}
-                resizeMode="stretch"
-                style={{height: 54, width: 54}}></Image>
-              <Text style={[style.s12, {color: theme.txt, marginTop: 5}]}>
-                Pazarlama
-              </Text>
-            </TouchableOpacity>
-            <View style={{alignItems: 'center', height: 54, width: 54}}></View>
-          </View>
-          {searchResults.map(result => (
-            <View key={result.id}>
-              <Text style={{color: theme.txt}}>{result.title.tr}</Text>
-              {/* Diğer detayları ekleyin gerekirse */}
-              <Text style={{color: theme.txt}}>ID: {result.id}</Text>
-            </View>
-          ))}
-        </ScrollView>
+        ))}
       </View>
     </SafeAreaView>
   );
