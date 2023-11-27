@@ -10,6 +10,7 @@ import {
   Image,
   ScrollView,
   Platform,
+  FlatList,
 } from 'react-native';
 import React, {useState, useContext} from 'react';
 import {useNavigation} from '@react-navigation/native';
@@ -32,6 +33,59 @@ SystemNavigationBar.setNavigationColor('#000000', 'dark', 'navigation');
 
 const width = Dimensions.get('screen').width;
 const height = Dimensions.get('screen').height;
+const yourDataArray = [
+  {id: 1, title: 'Canlı Ders', image: require('../../assets/image/canli.png')},
+  {
+    id: 2,
+    title: 'Sosyal Medya',
+    image: require('../../assets/image/sosyal.png'),
+  },
+  {
+    id: 3,
+    title: 'E-Ticaret\nYönetimi Eğitimi',
+    image: require('../../assets/image/sosyal.png'),
+  },
+  {
+    id: 4,
+    title: 'Dijital Pazarlama',
+    image: require('../../assets/image/sosyal.png'),
+  },
+  {
+    id: 5,
+    title: 'Kariyer Galişim',
+    image: require('../../assets/image/kariyer.png'),
+  },
+  {id: 6, title: 'Yazılım', image: require('../../assets/image/sosyal.png')},
+  {
+    id: 7,
+    title: 'Kişisel Gelişim',
+    image: require('../../assets/image/kisisel.png'),
+  },
+  {
+    id: 8,
+    title: 'Pazarlama',
+    image: require('../../assets/image/pazarlama.png'),
+  },
+];
+
+const renderItem = ({item, theme}) => (
+  <TouchableOpacity
+    // onPress={() => /* handle item press */}
+    style={{alignItems: 'center', marginHorizontal: 10}}>
+    <Image
+      source={item.image}
+      resizeMode="stretch"
+      style={{height: 54, width: 54}}
+    />
+    <Text
+      style={[
+        style.s12,
+        {color: theme.txt, marginTop: 5, textAlign: 'center'},
+      ]}>
+      {item.title}
+    </Text>
+  </TouchableOpacity>
+);
 
 export default function Home() {
   const navigation = useNavigation();
@@ -192,7 +246,7 @@ export default function Home() {
             En İyi Online Kurslar
           </Text>
 
-          <View
+          {/* <View
             style={{
               flexDirection: 'row',
               alignItems: 'center',
@@ -251,8 +305,15 @@ export default function Home() {
                 Dijital{'\n'}Pazarlama
               </Text>
             </View>
-          </View>
-
+          </View> */}
+          <FlatList
+            style={{marginTop: 20}}
+            showsHorizontalScrollIndicator={false}
+            data={yourDataArray}
+            renderItem={item => renderItem({...item, theme})}
+            keyExtractor={item => item.id.toString()}
+            horizontal
+          />
           <View
             style={{
               flexDirection: 'row',
