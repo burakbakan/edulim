@@ -162,7 +162,7 @@ export default function ASub() {
               onPress={() => navigation.navigate('Physics')}
               style={{alignItems: 'center'}}>
               <Image
-                source={require('../../assets/image/a3.png')}
+                source={require('../../assets/image/canli.png')}
                 resizeMode="stretch"
                 style={{height: 54, width: 54}}></Image>
               <Text style={[style.s12, {color: theme.txt, marginTop: 5}]}>
@@ -173,7 +173,7 @@ export default function ASub() {
               onPress={() => navigation.navigate('Physics')}
               style={{alignItems: 'center'}}>
               <Image
-                source={require('../../assets/image/a4.png')}
+                source={require('../../assets/image/sosyal.png')}
                 resizeMode="stretch"
                 style={{height: 54, width: 54}}></Image>
               <Text style={[style.s12, {color: theme.txt, marginTop: 5}]}>
@@ -184,7 +184,7 @@ export default function ASub() {
               onPress={() => navigation.navigate('Physics')}
               style={{alignItems: 'center'}}>
               <Image
-                source={require('../../assets/image/a5.png')}
+                source={require('../../assets/image/sosyal.png')}
                 resizeMode="stretch"
                 style={{height: 54, width: 54}}></Image>
               <Text style={[style.s12, {color: theme.txt, marginTop: 5}]}>
@@ -195,7 +195,7 @@ export default function ASub() {
               onPress={() => navigation.navigate('Physics')}
               style={{alignItems: 'center'}}>
               <Image
-                source={require('../../assets/image/a6.png')}
+                source={require('../../assets/image/sosyal.png')}
                 resizeMode="stretch"
                 style={{height: 54, width: 54}}></Image>
               <Text style={[style.s12, {color: theme.txt, marginTop: 5}]}>
