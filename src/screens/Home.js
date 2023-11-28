@@ -38,7 +38,7 @@ export default function Home() {
   const navigation = useNavigation();
   const theme = useContext(themeContext);
   const [categories, setCategories] = useState([]);
-  const [homeCourses, setHomeCourses] = useState([]);
+  const [videoCourses, setVideoCourses] = useState([]);
 
   useEffect(() => {
     // Fetch categories from the API
@@ -63,48 +63,52 @@ export default function Home() {
       })
       .catch(error => console.error('Error fetching categories:', error));
   }, []);
-
   useEffect(() => {
-    // Fetch home courses from the API
     fetch('https://demo.edulim.com.tr/api/get-home-courses')
       .then(response => response.json())
       .then(data => {
         if (Array.isArray(data.data)) {
-          // If data.data is an array, setHomeCourses and log values
-          setHomeCourses(data.data);
-
-          // Log the home courses data to the console
-          console.log('Home Courses:', data.data);
+          setVideoCourses(data.data);
+          console.log('Video Courses:', data.data);
         } else {
           console.error('Data.data is not an array:', data);
         }
       })
-      .catch(error => console.error('Error fetching home courses:', error));
-  }, []); // Empty dependency array to run the effect only once on mount
-
-  useEffect(() => {
-    // Fetch categories from the API
-    fetch('https://demo.edulim.com.tr/api/categories')
-      .then(response => response.json())
-      .then(data => {
-        if (Array.isArray(data.data)) {
-          // If data.data is an array, setCategories and log values
-          setCategories(data.data);
-
-          // Log the name and image values to the console
-          data.data.forEach(category => {
-            console.log('Category Name:', category.name);
-            console.log(
-              'Category Image:',
-              `https://demo.edulim.com.tr/${category.image}`,
-            );
-          });
-        } else {
-          console.error('Data.data is not an array:', data);
-        }
-      })
-      .catch(error => console.error('Error fetching categories:', error));
+      .catch(error => console.error('Error fetching video courses:', error));
   }, []);
+
+  const renderVideoItem = ({item}) => (
+    <TouchableOpacity
+      onPress={() => navigation.navigate('Live', {course: item})}
+      style={{marginRight: 15}}>
+      <Image
+        source={{uri: `https://demo.edulim.com.tr/${item.image}`}}
+        resizeMode="cover"
+        style={{height: height / 6, width: width / 2.5, borderRadius: 10}}
+      />
+      <Text style={[style.m16, {color: theme.txt, marginTop: 10}]}>
+        {item.title && typeof item.title === 'object' && item.title.tr
+          ? truncateText(item.title.tr, 20)
+          : 'Unknown Title'}
+      </Text>
+      <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 5}}>
+        <Text style={[style.r14, {color: theme.disable}]}>Fiyat: </Text>
+        <Text
+          style={[
+            style.r14,
+            {color: theme.disable, textDecorationLine: 'line-through'},
+          ]}>
+          {item.price || 'N/A'}₺
+        </Text>
+        <Text style={[style.r14, {color: 'red', marginLeft: 5}]}>
+          {item.discount_price || 'N/A'}₺
+        </Text>
+      </View>
+      <Text style={[style.r14, {color: theme.disable, marginTop: 5}]}>
+        Eğitmen: {item.user.name || 'N/A'}
+      </Text>
+    </TouchableOpacity>
+  );
 
   const renderItem = ({item}) => (
     <TouchableOpacity
@@ -374,51 +378,14 @@ export default function Home() {
             </TouchableOpacity>
           </View>
 
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              marginTop: 20,
-              marginBottom: 80,
-              marginHorizontal: 5,
-              backgroundColor: '#fff',
-              padding: 10,
-              borderRadius: 10,
-              shadowColor: '#000',
-              shadowOffset: {
-                width: 0,
-                height: 2,
-              },
-              shadowOpacity: 0.15,
-              shadowRadius: 9.65,
-              elevation: 4,
-            }}>
-            <Image
-              source={require('../../assets/image/a7.png')}
-              resizeMode="stretch"
-              style={{height: height / 9, width: width / 3.3}}></Image>
-            <View style={{flex: 1, marginLeft: 12}}>
-              <Text style={[style.s12, {color: theme.txt}]}>⭐ 4.6</Text>
-              <Text style={[style.m16, {color: theme.txt, lineHeight: 24}]}>
-                Yapay Zeka ve Makine Öğrenmesi Kursu
-              </Text>
-              <Text style={[style.r12, {color: theme.disable, lineHeight: 20}]}>
-                By Nozomi Sasaki
-              </Text>
-              <View
-                style={{
-                  backgroundColor: Colors.red,
-                  width: width / 4.5,
-                  borderRadius: 20,
-                  alignItems: 'center',
-                  paddingVertical: 2,
-                }}>
-                <Text style={[style.r12, {color: Colors.secondary}]}>
-                  Canlı
-                </Text>
-              </View>
-            </View>
-          </View>
+          <FlatList
+            style={{marginTop: 20, marginBottom: 80}}
+            showsHorizontalScrollIndicator={false}
+            data={videoCourses}
+            renderItem={renderVideoItem}
+            keyExtractor={item => item.id.toString()}
+            horizontal
+          />
         </ScrollView>
       </View>
     </SafeAreaView>
